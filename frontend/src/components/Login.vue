@@ -18,6 +18,8 @@
 <script>
 import router from '../router'
 import axios from 'axios'
+import {store} from "../store/store";
+
 export default {
   name: 'login',
   data() {
@@ -37,7 +39,7 @@ export default {
             if (response.data['status'] === 'success') {
                 const token = 'Bearer ' + response.data['token'];
                 localStorage.setItem('token', token);
-                self.$store.state.user = 'online';
+                store.dispatch('manageUser', 'online');
                 router.push({name: 'profile'});
             } else {
                 router.push({name: 'login'})
