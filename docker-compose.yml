@@ -14,11 +14,11 @@ services:
     image: postgres
     environment:
       POSTGRES_PASSWORD: 'postgres'
-    networks: ['mynetwork']
     volumes:
       - db:/var/lib/postgresql
     ports:
       - "5432:5432"
+    networks: ['mynetwork']
 
   frontend:
     build: ./frontend
@@ -28,6 +28,7 @@ services:
       - backend
     ports:
       - "8080:8080"
+    networks: ['mynetwork']
 
 volumes:
   db:
