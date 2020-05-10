@@ -44,10 +44,13 @@ class Person(AbstractBaseUser):
         :return: Hashed password with salt.
                  First 64 symbols are the salt.
         """
-        salt = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
+        random_numbers = os.urandom(60)
+        salt = hashlib.sha256(random_numbers).hexdigest().encode('ascii')
+        utf_encoded_password = password.encode('utf-8')
         hashed_password = hashlib.pbkdf2_hmac('sha512',
-                                              password.encode('utf-8'),
-                                              salt, 100000)
+                                              utf_encoded_password,
+                                              salt,
+                                              100000)
         hashed_password = binascii.hexlify(hashed_password)
         return (salt + hashed_password).decode('ascii')
 
@@ -63,9 +66,11 @@ class Person(AbstractBaseUser):
 
         if user is not None:
             salt = user.password[:64]
+            utf_encoded_password = password.encode('utf-8')
+            ascii_encoded_salt = salt.encode('ascii')
             hashed_password = hashlib.pbkdf2_hmac('sha512',
-                                                  password.encode('utf-8'),
-                                                  salt.encode('ascii'),
+                                                  utf_encoded_password,
+                                                  ascii_encoded_salt,
                                                   100000)
             hashed_password = salt + binascii.hexlify(hashed_password).decode(
                 'ascii'
@@ -73,7 +78,7 @@ class Person(AbstractBaseUser):
             if hashed_password == user.password:
                 return user
 
-    def login(self):
+    def generate_jwt_token(self):
         """
         Generates JWT token and updates last login
         :return: JWT token
