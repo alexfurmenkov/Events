@@ -5,8 +5,9 @@
      <form class="form">
       <input class="field" type="text" placeholder="header" v-model="header"><br>
       <input class="field" type="text" placeholder="contents" v-model="contents"><br>
-      <input class="field" type="text" placeholder="date" v-model="date"><br>
-      <p class="tip">Date should look like <br> 2020-10-05 10:30 (%Y-%m-%d %H:%M)</p>
+     <date-picker v-model="date" lang="en" type="datetime" format="YYYY-MM-DD HH:mm"></date-picker>
+       <br>
+       <br>
       <input class="button" type="submit" value="Add" v-on:click.prevent="post">
      </form>
      <p class="all-events" v-on:click.prevent="get_all_events">Get all my events</p>
@@ -24,8 +25,13 @@
 
 <script>
 import axios from 'axios'
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css';
 export default {
   name: 'profile',
+  components: {
+      DatePicker
+  },
   data () {
       return {
           header: '',
@@ -116,10 +122,6 @@ h1 {
 .all-events:hover, .find-link:hover {
   cursor: pointer;
   text-decoration: underline;
-}
-.tip {
-  font-size: 13px;
-  color: gray;
 }
 .events-holder {
   margin: 0;

@@ -11,8 +11,10 @@
      <form class="form">
       <input class="field" type="text" placeholder="header" v-model="updated_details.header_updated"><br>
       <input class="field" type="text" placeholder="contents" v-model="updated_details.contents_updated"><br>
-      <input class="field" type="text" placeholder="date" v-model="updated_details.date_updated"><br>
-      <input class="button" type="submit" value="Update" v-on:click.prevent="update_post">
+      <date-picker v-model="updated_details.date_updated" lang="en" type="datetime" format="YYYY-MM-DD HH:mm"></date-picker>
+       <br>
+       <br>
+       <input class="button" type="submit" value="Update" v-on:click.prevent="update_post">
      </form>
     <input class="button" type="submit" value="Delete" v-on:click.prevent="delete_post"><br>
     <router-link to="/profile" class="link">Back to profile</router-link>
@@ -25,8 +27,13 @@
 <script>
 import router from '../router'
 import axios from 'axios'
+import DatePicker from 'vue2-datepicker'
+import 'vue2-datepicker/index.css';
 export default {
   name: 'post',
+    components: {
+      DatePicker
+  },
   data: () => ({
     id: '',
     header: '',
