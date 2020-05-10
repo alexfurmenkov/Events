@@ -2,7 +2,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 
 from events.models import Person
-from events.utils import ResponseNotFound, ResponseLogin
+from events.responses import ResponseNotFound, ResponseLogin
 from events.decorators import request_validation
 from events.serializers import LoginSerializer
 
@@ -20,7 +20,7 @@ class Login(APIView):
         """
         Logs user in if username and password are correct
         :param request: POST HTTP request with user details
-                        in body, e.g. {'username': 1, 'password': 1}
+                        in body, e.g. {'email': 1, 'password': 1}
         :return: JSON Response with success or fail
         """
         user = Person.authenticate_user(
@@ -31,5 +31,5 @@ class Login(APIView):
             return ResponseNotFound(
                 'User with such credentials is not found'
             )
-        jwt_token = user.login()
+        jwt_token = user.generate_jwt_token()
         return ResponseLogin(jwt_token)

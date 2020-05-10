@@ -4,13 +4,13 @@ from .posts import (
     PostsFilteredHandler,
 )
 from .users import (
-    Signup,
+    SignUp,
     Login,
 )
 
 
 __all__ = [
-    'Signup',
+    'SignUp',
     'Login',
     'PostHandler',
     'PostByIdHandler',

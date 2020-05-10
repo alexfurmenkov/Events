@@ -6,7 +6,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from events.models import Post
 from events.serializers import PostSerializer, EditPostSerializer
-from events.utils import ResponseNotFound, ResponseSuccess
+from events.responses import ResponseNotFound, ResponseSuccess
 
 
 class PostByIdHandler(APIView):
@@ -27,10 +27,9 @@ class PostByIdHandler(APIView):
         """
         post = Post.get_event_by_id(event_id=post_id)
 
-        if post:
-            serializer = PostSerializer(instance=post)
-        else:
+        if not post:
             return ResponseNotFound('Post with such id is not found')
+        serializer = PostSerializer(instance=post)
         return Response(serializer.data, status=HTTP_200_OK)
 
     @classmethod
@@ -62,10 +61,9 @@ class PostByIdHandler(APIView):
         """
         post = Post.get_event_by_id(event_id=post_id)
 
-        if post:
-            post.delete()
-        else:
+        if not post:
             return ResponseNotFound('Post with such id is not found')
+        post.delete()
         return ResponseSuccess(
             f'Event {post.header} is deleted'
         )

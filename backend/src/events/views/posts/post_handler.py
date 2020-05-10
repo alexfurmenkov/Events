@@ -8,7 +8,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from events.models import Post, Person
 from events.serializers import PostSerializer, SavePostSerializer
-from events.utils import (
+from events.responses import (
     ResponseAlreadyExists,
     ResponseCreated,
     ResponseNotFound
@@ -49,13 +49,12 @@ class PostHandler(APIView):
         data = request.data
         user = Person.objects.get(id=request.user.id)
 
-        if Post.get_event_by_contents(data['contents'], user.id) is None:
-            Post.objects.create(
+        if Post.get_event_by_contents(data['contents'], user.id):
+            return ResponseAlreadyExists('Event with such content already exists')
+        Post.objects.create(
                 author=user,
                 header=data['header'],
                 contents=data['contents'],
                 date=datetime.datetime.strptime(data['date'], '%Y-%m-%d %H:%M')
-            )
-        else:
-            return ResponseAlreadyExists('Event with such content already exists')
+        )
         return ResponseCreated('New event is created')

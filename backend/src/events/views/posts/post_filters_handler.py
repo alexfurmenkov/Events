@@ -6,7 +6,7 @@ from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from events.models import Post
 from events.serializers import PostSerializer
-from events.utils import ResponseNotFound
+from events.responses import ResponseNotFound
 
 
 class PostsFilteredHandler(APIView):
@@ -29,13 +29,12 @@ class PostsFilteredHandler(APIView):
             data=request.query_params,
             author_id=request.user.id
         )
-        if posts:
-            serializer = PostSerializer(
-                instance=posts,
-                many=True
-            )
-        else:
+        if not posts:
             return ResponseNotFound(
                 'Posts with such parameters are not found'
             )
+        serializer = PostSerializer(
+            instance=posts,
+            many=True
+        )
         return Response(serializer.data, status=HTTP_200_OK)

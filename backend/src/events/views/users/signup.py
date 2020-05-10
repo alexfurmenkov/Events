@@ -4,10 +4,10 @@ from rest_framework.views import APIView
 from events.models import Person
 from events.decorators import request_validation
 from events.serializers import SignupSerializer
-from events.utils import ResponseCreated, ResponseAlreadyExists
+from events.responses import ResponseCreated, ResponseAlreadyExists
 
 
-class Signup(APIView):
+class SignUp(APIView):
     """
     Class based view to handle any requests
     on URL "/users/signup/"
@@ -35,6 +35,4 @@ class Signup(APIView):
                 data['password']
             )
         )
-        return ResponseCreated(
-            'New user is saved'
-        )
+        return ResponseCreated('New user is saved')
