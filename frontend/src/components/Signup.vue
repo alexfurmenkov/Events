@@ -38,7 +38,7 @@ export default {
         })
         .catch(function (error) {
             if (error.response) {
-                alert('Enter valid email address and password longer than 6 digits');
+                alert(error.response.data['message']);
             }
         })
     }
