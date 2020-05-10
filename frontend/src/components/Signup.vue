@@ -25,12 +25,20 @@ export default {
   },
   methods: {
     post: function() {
-        axios.post('http://localhost:8000/users/signup/',{
-            email: this.email,
-            password: this.password
-        }).then(function (response) {
+        axios.post(
+            'http://localhost:8000/users/signup/',
+            {
+              email: this.email,
+              password: this.password
+            }
+        ).then(function (response) {
             if (response.data['status'] === 'success') {
                 router.push({name: 'login'});
+            }
+        })
+        .catch(function (error) {
+            if (error.response) {
+                alert('Enter valid email address and password longer than 6 digits');
             }
         })
     }

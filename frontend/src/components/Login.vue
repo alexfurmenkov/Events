@@ -45,6 +45,11 @@ export default {
                 router.push({name: 'login'})
             }
         })
+        .catch(function (error) {
+            if (error.response) {
+                alert('User is not found');
+            }
+        })
     }
   }
 }
