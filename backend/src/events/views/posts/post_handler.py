@@ -51,10 +51,11 @@ class PostHandler(APIView):
 
         if Post.get_event_by_contents(data['contents'], user.id):
             return ResponseAlreadyExists('Event with such content already exists')
+        formatted_data = data['date'].replace('T', ' ')[:-8]
         Post.objects.create(
                 author=user,
                 header=data['header'],
                 contents=data['contents'],
-                date=datetime.datetime.strptime(data['date'], '%Y-%m-%d %H:%M')
+                date=datetime.datetime.strptime(formatted_data, '%Y-%m-%d %H:%M')
         )
         return ResponseCreated('New event is created')
