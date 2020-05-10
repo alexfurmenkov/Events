@@ -1,5 +1,5 @@
 backend/venv/
-backend/.idea/
+.idea/
 backend/migrations/
 __pycache__/
 frontend/node_modules/
