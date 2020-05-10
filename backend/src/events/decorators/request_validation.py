@@ -1,6 +1,6 @@
 import functools
 
-from events.utils import ResponseFail
+from events.responses import ResponseFail
 
 
 def request_validation(serializer):
