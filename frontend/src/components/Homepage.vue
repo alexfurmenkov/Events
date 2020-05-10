@@ -9,11 +9,13 @@
 </template>
 
 <script>
+import {store} from "../store/store";
 export default {
   name: 'home',
   methods: {
       logout: function () {
-          this.$store.state.user = 'offline';
+          store.dispatch('manageUser', 'offline');
+          localStorage.removeItem('token');
       }
   }
 }
