@@ -7,7 +7,7 @@ from .views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('users/signup/', Signup.as_view(),
+    path('users/signup/', SignUp.as_view(),
          name='signup'),
     path('users/login/', Login.as_view(),
          name='login'),
