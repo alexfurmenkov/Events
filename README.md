@@ -21,6 +21,8 @@ Run `git clone https://github.com/alexfurmenkov/Events.git`
     
     `python /code/manage.py migrate`
     
+    ![](migrations_snapshot.png)
+    
     _Using terminal:_
     
     Run `docker ps`
