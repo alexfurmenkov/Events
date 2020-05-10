@@ -13,4 +13,6 @@ ADD requirements /config
 RUN pip install --upgrade pip
 RUN pip install -r /config/requirements.txt
 
+EXPOSE 8000
+
 ADD src /code
