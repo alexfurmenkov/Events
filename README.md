@@ -1,13 +1,13 @@
-#Events SPA
+# Events SPA
 
-##Launching the project
-###Docker
+## Launching the project
+### Docker
 Run `docker-compose up` if building for the first time or `docker-compose up --build` to rebuild
 
-##Stack
-###Frontend
+## Stack
+### Frontend
 Vue.js
-###Backend
+### Backend
 Django
 
 DRF
