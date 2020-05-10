@@ -1,4 +1,4 @@
-from .crud import PostSerializer
+from .models import PostSerializer
 from .validation import (
     EditPostSerializer,
     SavePostSerializer,
