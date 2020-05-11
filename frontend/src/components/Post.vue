@@ -49,7 +49,7 @@ export default {
       onload_request: function() {
         let self = this;
         axios.get(
-            'http://localhost:8000/posts/' + this.$route.path.split('/')[2],
+            'http://192.168.99.100:8000/posts/' + this.$route.path.split('/')[2],
             {
                 headers: {'Authorization': localStorage.getItem('token')}
             }
@@ -63,7 +63,7 @@ export default {
       },
       delete_post: function () {
         axios.delete(
-            'http://localhost:8000/posts/' + this.id + '/',
+            'http://192.168.99.100:8000/posts/' + this.id + '/',
             {
                 headers: {'Authorization': localStorage.getItem('token')}
             }
@@ -81,7 +81,7 @@ export default {
             }
         }
         axios.put(
-            'http://localhost:8000/posts/' + this.$route.path.split('/')[2] + '/',
+            'http://192.168.99.100:8000/posts/' + this.$route.path.split('/')[2] + '/',
             data,
             {headers: {'Authorization': localStorage.getItem('token')}}
         )

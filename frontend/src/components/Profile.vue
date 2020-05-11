@@ -47,7 +47,7 @@ export default {
         }
         else {
           axios.post(
-            'http://localhost:8000/posts/',
+            'http://192.168.99.100:8000/posts/',
             {
                 header: this.header,
                 contents: this.contents,
@@ -70,7 +70,7 @@ export default {
     get_all_events: function () {
         let self = this;
         axios.get(
-            'http://localhost:8000/posts/',
+            'http://192.168.99.100:8000/posts/',
             {
                 headers: {'Authorization': localStorage.getItem('token')}
             }

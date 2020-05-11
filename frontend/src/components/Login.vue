@@ -31,7 +31,7 @@ export default {
   methods: {
     post: function() {
         let self = this;
-        axios.post('http://localhost:8000/users/login/',{
+        axios.post('http://192.168.99.100:8000/users/login/',{
             email: this.email,
             password: this.password
         })
