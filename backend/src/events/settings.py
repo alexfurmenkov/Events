@@ -1,6 +1,9 @@
 import os
 from datetime import timedelta
 
+from celery.schedules import crontab
+
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -136,3 +139,22 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'worktestalexfurm@gmail.com'
+EMAIL_HOST_PASSWORD = 'dXlzn4aq'
+
+CELERY_BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_BEAT_SCHEDULE = {
+    'hello': {
+        'task': 'events.tasks.hello',
+        'schedule': crontab()
+    }
+}
