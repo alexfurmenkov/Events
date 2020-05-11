@@ -10,7 +10,7 @@ from .models import Post
 
 
 @shared_task
-def hello():
+def send_email_notification():
     print('Starting to check if there are some upcoming events')
     current_timedate = datetime.datetime.now()
 

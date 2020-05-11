@@ -154,7 +154,7 @@ CELERY_TASK_SERIALIZER = 'json'
 
 CELERY_BEAT_SCHEDULE = {
     'hello': {
-        'task': 'events.tasks.hello',
+        'task': 'events.tasks.send_email_notification',
         'schedule': crontab()
     }
 }
