@@ -74,34 +74,33 @@ class Post(models.Model):
                             of the Post object and now
         :return: Post object with corresponding contents
         """
-        posts = None
+        timedelta = 0
         if time_period == 'day':
-            posts = cls.objects.filter(
-                author_id=author_id,
-                date__range=[
-                    datetime.date.today(),
-                    datetime.date.today() + datetime.timedelta(days=1)
-                ]
-            )
+            timedelta = 1
         elif time_period == 'week':
-            posts = cls.objects.filter(
-                author_id=author_id,
-                date__range=[
-                    datetime.date.today(),
-                    datetime.date.today() + datetime.timedelta(days=7)
-                ]
-            )
+            timedelta = 7
         elif time_period == 'month':
-            posts = cls.objects.filter(
-                author_id=author_id,
-                date__range=[
-                    datetime.date.today(),
-                    datetime.date.today() + datetime.timedelta(weeks=4)
-                ]
-            )
+            timedelta = 30
+
+        posts = cls.objects.filter(
+            author_id=author_id,
+            date__range=[
+                datetime.date.today(),
+                datetime.date.today() + datetime.timedelta(days=timedelta)
+            ]
+        )
         if not posts:
             return None
         return posts
+
+    @classmethod
+    def get_events_by_time_and_header(cls, time_period, header, author_id):
+        posts = cls.get_events_by_time(
+            time_period,
+            author_id
+        )
+        if posts:
+            return [post for post in posts if post.header == header]
 
     @classmethod
     def get_events_by_filters(cls, data, author_id):
@@ -124,19 +123,18 @@ class Post(models.Model):
                 author_id
             )
         elif 'header' in data and 'time_period' in data:
-            posts = cls.get_events_by_time(
+            posts = cls.get_events_by_time_and_header(
                 data['time_period'],
+                data['header'],
                 author_id
             )
-            if posts:
-                posts = [post for post in posts if post.header == data['header']]
         if not posts:
             return None
         return posts
 
     def update_attribute(self, data):
         """
-        Updates attribute of any Event object
+        Updates attribute of any Post object
         :param data: Dict with attributes to be updated
         :return: Dict with updated attributes
         """
