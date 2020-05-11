@@ -43,7 +43,7 @@ export default {
           }
       }
       axios.get(
-          'http://192.168.99.100:8000/posts/find/',
+          'http://localhost:8000/posts/find/',
           {
               params: data,
               headers: {'Authorization': localStorage.getItem('token')}

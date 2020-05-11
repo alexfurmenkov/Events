@@ -4,7 +4,7 @@
     <router-link class="link" to="/login" v-if="this.$store.state.user === 'offline'">Login<br><br></router-link>
     <router-link class="link" to="/signup" v-if="this.$store.state.user === 'offline'">Signup</router-link>
     <a href="#" class="link" v-if="this.$store.state.user === 'online'" v-on:click.prevent="logout">Logout <br><br></a>
-    <router-link class="link" to="/profile" v-if="this.$store.state.user === 'online'">Profile</router-link>
+    <router-link class="link" to="/profile" v-if="this.$store.state.user === 'online'">Go to Profile</router-link>
   </div>
 </template>
 
