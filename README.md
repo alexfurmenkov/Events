@@ -6,7 +6,7 @@ Run `git clone https://github.com/alexfurmenkov/Events.git`
 
 ### Docker
 1. Run `docker-compose up` if building for the first time or `docker-compose up --build` to rebuild
-2. Wait 
+2. Wait. Move to the next step as soon as you see `Your application is running here: http://0.0.0.0:8080`
 3. **Run migrations in the running "backend" container**
 
     _Using PyCharm:_
