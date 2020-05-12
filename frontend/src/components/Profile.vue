@@ -62,7 +62,7 @@ export default {
           })
           .catch(function (error) {
               if (error.response) {
-                  alert('Date should look like 2020-05-11 10:30 (%Y-%m-%d %H:%M)');
+                  alert(error.response.data['message']);
               }
           })
         }
